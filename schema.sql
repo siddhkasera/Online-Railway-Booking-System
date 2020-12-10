@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE admin(
   `admin-user` varchar(30) NOT NULL,
   `admin-pass` varchar(30) NOT NULL,
-primary key(`adminuser`));
+primary key(`admin-user`));
 
 DROP TABLE IF EXISTS `customer`;
 create table customer ( 
@@ -14,14 +14,14 @@ create table customer (
   `first name` varchar(25) NOT NULL,
   `last name` varchar(25) NOT NULL, 
   `customer-pass` varchar(45) NOT NULL, 
-  primary key(`username`)
+  primary key(`customer-user`)
 );
 
 DROP TABLE IF EXISTS `customerrep`;
 CREATE TABLE customerrep(
   `rep-user` varchar(30) NOT NULL,
   `rep-pass` varchar(30) NOT NULL,
-primary key(`repuser`));
+primary key(`rep-user`));
 
 DROP TABLE IF EXISTS `train`;
 CREATE TABLE train(
