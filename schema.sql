@@ -1,6 +1,28 @@
 create database if not exists `TrainSchedule`;
 use `TrainSchedule`;
 
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE admin(
+`adminuser` varchar(30) NOT NULL,
+`adminpass` varchar(30) NOT NULL,
+primary key(`adminuser`));
+
+DROP TABLE IF EXISTS `customer`;
+create table customer ( 
+  `username` varchar(30) NOT NULL,
+  `email` varchar(45) NOT NULL, 
+  `first name` varchar(25) NOT NULL,
+  `last name` varchar(25) NOT NULL, 
+  `password` varchar(45) NOT NULL, 
+  primary key(`username`)
+);
+
+DROP TABLE IF EXISTS `customerrep`;
+CREATE TABLE customerrep(
+`repuser` varchar(30) NOT NULL,
+`reppass` varchar(30) NOT NULL,
+primary key(`repuser`));
+
 DROP TABLE IF EXISTS `train`;
 CREATE TABLE train(
   `trainId` varchar(5) NOT NULL,
@@ -92,16 +114,6 @@ create table ScheduleEndsAt (
   primary key(`trainID`, `name`),
   foreign key(`trainID`, `name`) References TrainSchedule.trainRunsOn(`trainID`, `name`), 
   foreign key(`uniqueID`) References TrainSchedule.stop(`uniqueID`)
-);
-
-DROP TABLE IF EXISTS `customer`;
-create table customer ( 
-  `username` varchar(30) NOT NULL,
-  `email` varchar(45) NOT NULL, 
-  `first name` varchar(25) NOT NULL,
-  `last name` varchar(25) NOT NULL, 
-  `password` varchar(45) NOT NULL, 
-  primary key(`username`)
 );
 
 DROP TABLE IF EXISTS `reservation`;
