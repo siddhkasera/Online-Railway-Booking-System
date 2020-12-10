@@ -3,24 +3,24 @@ use `TrainSchedule`;
 
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE admin(
-`adminuser` varchar(30) NOT NULL,
-`adminpass` varchar(30) NOT NULL,
+  `admin-user` varchar(30) NOT NULL,
+  `admin-pass` varchar(30) NOT NULL,
 primary key(`adminuser`));
 
 DROP TABLE IF EXISTS `customer`;
 create table customer ( 
-  `username` varchar(30) NOT NULL,
+  `customer-user` varchar(30) NOT NULL,
   `email` varchar(45) NOT NULL, 
   `first name` varchar(25) NOT NULL,
   `last name` varchar(25) NOT NULL, 
-  `password` varchar(45) NOT NULL, 
+  `customer-pass` varchar(45) NOT NULL, 
   primary key(`username`)
 );
 
 DROP TABLE IF EXISTS `customerrep`;
 CREATE TABLE customerrep(
-`repuser` varchar(30) NOT NULL,
-`reppass` varchar(30) NOT NULL,
+  `rep-user` varchar(30) NOT NULL,
+  `rep-pass` varchar(30) NOT NULL,
 primary key(`repuser`));
 
 DROP TABLE IF EXISTS `train`;
