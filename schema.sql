@@ -53,7 +53,7 @@ CREATE TABLE trainEndsAt(
   `state` varchar(12) NOT NULL,
   `name` varchar(21) NOT NULL,
   `city` varchar(15) NOT NULL,
-  primary key(`uniqueId`) NOT NULL,
+  primary key(`uniqueId`),
   foreign key(`trainId`) References TrainSchedule.train(`trainId`),
   foreign key(`uniqueId`) References TrainSchedule.destination(`uniqueId`)
 );
