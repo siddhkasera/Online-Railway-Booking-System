@@ -16,22 +16,22 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin`(
-  `admin-user` varchar(30) NOT NULL,
-  `admin-pass` varchar(30) NOT NULL,
-	primary key(`admin-user`)
+  `adminuser` varchar(30) NOT NULL,
+  `adminpass` varchar(30) NOT NULL,
+  primary key(`adminuser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `customer` ( 
-  `customer-user` varchar(30) NOT NULL,
-  `email` varchar(45) NOT NULL, 
-  `first name` varchar(25) NOT NULL,
-  `last name` varchar(25) NOT NULL, 
-  `customer-pass` varchar(45) NOT NULL, 
-  primary key(`customer-user`)
+CREATE TABLE `customer`(
+  `customeruser` varchar(30) NOT NULL,
+  `email` varchar(45) DEFAULT NULL, 
+  `first name` varchar(25) DEFAULT NULL,
+  `last name` varchar(25) DEFAULT NULL, 
+  `customerpass` varchar(45) NOT NULL, 
+  primary key(`customeruser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,9 +39,9 @@ DROP TABLE IF EXISTS `customerrep`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customerrep`(
-	`rep-user` varchar(30) NOT NULL,
-	`rep-pass` varchar(30) NOT NULL,
-	primary key(`rep-user`)
+	`repuser` varchar(30) NOT NULL,
+	`reppass` varchar(30) NOT NULL,
+	primary key(`repuser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -169,6 +169,7 @@ DROP TABLE IF EXISTS `reservation`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservation` ( 
   `reservation no.`int NOT NULL, 
+  `tripType` enum('oneway', 'roundtrip') NOT NULL,
   `date` date NOT NULL, 
   `passenger`varchar(50), 
   primary key(`reservation no.`)
@@ -179,10 +180,10 @@ DROP TABLE IF EXISTS `reserves`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reserves` ( 
-  `customer-user` varchar(30) NOT NULL, 
+  `customeruser` varchar(30) NOT NULL, 
   `reservation no.` int NOT NULL, 
-  primary key(`customer-user`, `reservation no.`),
-  foreign key(`customer-user`) References `customer`(`customer-user`),
+  primary key(`customeruser`, `reservation no.`),
+  foreign key(`customeruser`) References `customer`(`customeruser`),
   foreign key(`reservation no.`) References `reservation`(`reservation no.`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
