@@ -18,6 +18,9 @@ DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`(
   `adminuser` varchar(30) NOT NULL,
   `adminpass` varchar(30) NOT NULL,
+  `ssn` varchar(9) NOT NULL,
+  `first name` varchar(25) DEFAULT NULL,
+  `last name` varchar(25) DEFAULT NULL,
   primary key(`adminuser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,9 +42,12 @@ DROP TABLE IF EXISTS `customerrep`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customerrep`(
-	`repuser` varchar(30) NOT NULL,
-	`reppass` varchar(30) NOT NULL,
-	primary key(`repuser`)
+  `repuser` varchar(30) NOT NULL,
+  `reppass` varchar(30) NOT NULL,
+  `ssn` varchar(9) NOT NULL,
+  `first name` varchar(25) DEFAULT NULL,
+  `last name` varchar(25) DEFAULT NULL,
+  primary key(`repuser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -170,6 +176,7 @@ DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE `reservation` ( 
   `reservation no.`int NOT NULL, 
   `tripType` enum('oneway', 'roundtrip') NOT NULL,
+  `agegroup` enum('child', 'adult', 'senior') NOT NULL,
   `date` date NOT NULL, 
   `passenger`varchar(50), 
   primary key(`reservation no.`)
