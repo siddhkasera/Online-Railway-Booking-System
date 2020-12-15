@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Check Costumer Representative Login</title>
+		<title>Check Customer Login</title>
 	</head>
 	
 	<body>
@@ -15,24 +15,25 @@
 		    String userid = request.getParameter("Username");
 		    String pwd = request.getParameter("Password");
 		    
-		    ApplicationDB db = new ApplicationDB();	
+		    ApplicationDB db = new ApplicationDB();
 			Connection con = db.getConnection();
 		    Statement stmt = con.createStatement();
 		    
 			ResultSet rs1;
-		    rs1 = stmt.executeQuery("SELECT * FROM customerrep WHERE repuser='" + userid + "'");
-		    if (rs1.next()){  
+		    rs1 = stmt.executeQuery("SELECT * FROM customer WHERE customeruser = '" + userid + "'");
+		    
+		    if (rs1.next()){
 		    	 ResultSet rs2;
-		    	    rs2 = stmt.executeQuery("SELECT * FROM customerrep WHERE repuser='" + userid + "' and reppass ='" + pwd + "'");
+		    	    rs2 = stmt.executeQuery("select * from customer where customeruser='" + userid + "' and customerpass='" + pwd + "'");
 		    	    if (rs2.next()) { // if set is not empty, store username in session
-		    	    	session.setAttribute("repuser", userid);
-		    	        response.sendRedirect("Rep-Success.jsp");
+		    	    	session.setAttribute("customeruser", userid);
+		    	        response.sendRedirect("Customer-Success.jsp");
 		    	    } else {  // try again if username exists but password is incorrect
-		    	        out.println("Invalid password <a href='Rep-Login.jsp'>try again</a>");
+		    	        out.println("Invalid password <a href='Customer-Login.jsp'>try again</a>");
 		    	    }
 		    }
 		    else{   // if username does not exist, create an account
-		    	out.println("Username doesn't exist <a href= 'Rep-Login.jsp'>Create An Costumer Representative Account</a>");
+		    	out.println("Username doesn't exist <a href= 'Customer-Login.jsp'>Create An Customer Account</a>");
 		    }
 		    
 		%>

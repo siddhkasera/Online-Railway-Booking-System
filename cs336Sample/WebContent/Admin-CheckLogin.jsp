@@ -20,19 +20,19 @@
 		    Statement stmt = con.createStatement();
 		    
 			ResultSet rs1;
-		    rs1 = stmt.executeQuery("select * from users where username='" + userid + "'");
+		    rs1 = stmt.executeQuery("SELECT * FROM admin WHERE adminuser ='" + userid + "'");
 		    if (rs1.next()){  
 		    	 ResultSet rs2;
-		    	    rs2 = stmt.executeQuery("select * from users where username='" + userid + "' and password='" + pwd + "'");
+		    	    rs2 = stmt.executeQuery("select * from admin where adminuser ='" + userid + "' and adminpass = '" + pwd+ "'");
 		    	    if (rs2.next()) { // if set is not empty, store username in session
-		    	    	session.setAttribute("user", userid);
+		    	    	session.setAttribute("adminuser", userid);
 		    	        response.sendRedirect("Admin-Success.jsp");
 		    	    } else {  // try again if username exists but password is incorrect
 		    	        out.println("Invalid password <a href='Admin-Login.jsp'>try again</a>");
 		    	    }
 		    }
 		    else{   // if username does not exist, create an account
-		    	out.println("Username doesn't exist <a href= 'Admin-CreateAccount.jsp'>Create An Admin Account</a>");
+		    	out.println("Username doesn't exist <a href= 'Admin-Login.jsp'>Create An Admin Account</a>");
 		    }
 		    
 		%>

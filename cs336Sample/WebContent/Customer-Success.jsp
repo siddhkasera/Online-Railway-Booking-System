@@ -9,17 +9,17 @@
 	</head>
 	<body>
 		<%
-		    if ((session.getAttribute("adminuser") == null)) {
+		    if ((session.getAttribute("customeruser") == null)) {
 		%>
 		You are not logged in<br/>
 		<a href="AccountType.jsp">Please Login</a>
 		<%} else {
 		%>
-		Welcome <%=session.getAttribute("adminuser") %>  
+		Welcome <%=session.getAttribute("customeruser") %>  
 		<a href="Logout.jsp">Log out</a>
 		<%
 		    }
 		%>
-		// add more things here for admin account functionalities
+		// add more things here for Costumer account functionalities
 	</body>
 </html>

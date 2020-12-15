@@ -13,19 +13,22 @@
 		<%
 			String userid = request.getParameter("Username");
 			String pass = request.getParameter("Password");
+			String ssn = request.getParameter("SSN");
+			String firstname = request.getParameter("FirstName");
+			String lastname = request.getParameter("LastName");
 			
 			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();	
+			Connection con = db.getConnection();
 			Statement stmt = con.createStatement();
 		    
 		    ResultSet rs;
-		    rs = stmt.executeQuery("select * from users where username='" + userid + "'");
+		    rs = stmt.executeQuery("select * from admin where adminuser ='" + userid + "'");
 		    if (rs.next()) {
-		    	out.println("Username exists, please try another <a href='Admin-CreateAccount.jsp'>try again</a>");
+		    	out.println("Username exists, please try another <a href='Admin-Login.jsp'>try again</a>");
 		    } else {
-		    	int x = stmt.executeUpdate("insert into users values('" +userid+ "', '" +pass+ "')");
-		    	session.setAttribute("user", userid); // the username will be stored in the session
-		        response.sendRedirect("Success.jsp");
+		    	int x = stmt.executeUpdate("insert into admin values('" + userid + "', '" + pass + "', '" + ssn + "', '" + firstname + "', '" + lastname + "')");
+		    	session.setAttribute("adminuser", userid); // the username will be stored in the session
+		        response.sendRedirect("Admin-Success.jsp");
 		    }
 		%>
 	</body>

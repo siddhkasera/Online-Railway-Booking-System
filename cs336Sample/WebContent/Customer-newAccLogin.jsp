@@ -6,29 +6,29 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Login to New Costumer Representative Account</title>
+		<title>Login to New Customer Account</title>
 	</head>
 	<body>
 		<%@ page import ="java.sql.*" %>
 		<%
 			String userid = request.getParameter("Username");
 			String pass = request.getParameter("Password");
-			String ssn = request.getParameter("SSN");
+			String email = request.getParameter("Email");
 			String firstname = request.getParameter("FirstName");
 			String lastname = request.getParameter("LastName");
 			
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();	
+			ApplicationDB db = new ApplicationDB();
+			Connection con = db.getConnection();
 			Statement stmt = con.createStatement();
 		    
 		    ResultSet rs;
-		    rs = stmt.executeQuery("SELECT * FROM customerrep WHERE repuser='" + userid + "'");
+		    rs = stmt.executeQuery("select * from customer where customeruser='" + userid + "'");
 		    if (rs.next()) {
-		    	out.println("Username exists, please try another <a href='Rep-Login.jsp'>try again</a>");
+		    	out.println("Username exists, please try another <a href='Customer-Login.jsp'>try again</a>");
 		    } else {
-		    	int x = stmt.executeUpdate("insert into customerrep values('" + userid + "', '" + pass + "', '" + ssn + "', '" + firstname + "', '" + lastname + "')");
-		    	session.setAttribute("repuser", userid); // the username will be stored in the session
-		        response.sendRedirect("Rep-Success.jsp");
+		    	int x = stmt.executeUpdate("insert into customer values('" + userid + "', '" + email + "', '" + firstname + "', '" + lastname + "', '" + pass + "')");
+		    	session.setAttribute("customeruser", userid); // the username will be stored in the session
+		        response.sendRedirect("Customer-Success.jsp");
 		    }
 		%>
 	</body>

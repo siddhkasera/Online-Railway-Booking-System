@@ -9,13 +9,13 @@
 	</head>
 	<body>
 		<%
-		    if ((session.getAttribute("user") == null)) {
+		    if ((session.getAttribute("repuser") == null)) {
 		%>
 		You are not logged in<br/>
 		<a href="AccountType.jsp">Please Login</a>
 		<%} else {
 		%>
-		Welcome <%=session.getAttribute("user") %>  
+		Welcome <%=session.getAttribute("repuser") %>  
 		<a href="Logout.jsp">Log out</a>
 		<%
 		    }

@@ -10,13 +10,20 @@
 	</head>
 	<body>
 		<h4>Already have an account? </h4>
-		<a href= 'Admin-CreateAccount.jsp'><button>Register</button></a>
-		
-		<h4>Register for a new account:</h4>
 		<form action="Admin-CheckLogin.jsp" method="POST">
 			Username: <input type="text" placeholder="Enter your username" required maxlength="30" name="Username"/> <br/>
-		    Password: <input type="password" placeholder="Enter your password" required maxlength="30" name="Password"/> <br/>
+		    Password: <input type="password" placeholder="Enter your password" required maxlength="45" name="Password"/> <br/>
 	       	<input type="submit" value="Submit"/>
-	     </form>
+	    </form>
+	     
+	    <h4>Register for a new account:</h4>
+		<form action="Admin-newAccLogin.jsp" method="POST">
+			Username: <input type="text" placeholder="Enter your username" required maxlength="30" name="Username"/> <br/>
+		    Password: <input type="password" placeholder="Enter your password" required maxlength="45" name="Password"/> <br/>
+	       	SSN: <input type="text" placeholder="Enter your ssn(numbers only)" required maxlength="9" name="SNN"/> <br/>
+	       	First Name: <input type="text" placeholder="Enter your first name" required maxlength="25" name="FirstName"/> <br/>
+	       	Last Name: <input type="text" placeholder="Enter your last name" required maxlength="25" name="LastName"/> <br/>
+	       	<input type="submit" value="Submit"/>
+	  	</form>
 	</body>
 </html>

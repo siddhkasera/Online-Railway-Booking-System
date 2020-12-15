@@ -4,12 +4,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Welcome to the Transit Line Web Application</title>
+		<title>Transit Line</title>
 	</head>
 	<body>
-		 <h1>Please select your account type: </h1>
+		 <h1>Welcome to the Transit Line Scheduling System</h1>
+		 <h4>Please select your account type: </h4>
 	     
-	     <a href="Costumer-Login.jsp" ><button>Customer</button></a>
+	     <a href="Customer-Login.jsp"><button>Customer</button></a>
 	     <a href="Rep-Login.jsp"><button>Customer Representative</button></a>
 	     <a href="Admin-Login.jsp"><button>Administrator</button></a>
 	    
