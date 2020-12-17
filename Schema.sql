@@ -104,11 +104,11 @@ DROP TABLE IF EXISTS `transitLine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `transitLine`(
-`transit-line-name` varchar(30) NOT NULL,
+`tlName` varchar(30) NOT NULL,
 `origin` int NOT NULL,
 `destination` int NOT NULL,
 `fixed fare` double NOT NULL,
-primary key(`transit-line-name`),
+primary key(`tlName`),
 foreign key (`origin`) References `station`(`stationId`),
 foreign key (`destination`) References `station`(`stationId`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -119,10 +119,10 @@ DROP TABLE IF EXISTS `Transit_line_stations`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Transit_line_stations`(
 `stationId` int NOT NULL,
-`transit-line-name` varchar(30) NOT NULL,
-primary key(`stationId`, `transit-line-name`),
+`tlName` varchar(30) NOT NULL,
+primary key(`stationId`, `tlName`),
 foreign key (`stationId`) References `station` (`stationId`),
-foreign key (`transit-line-name`) References `transitLine` (`transit-line-name`)
+foreign key (`tlName`) References `transitLine` (`tlName`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -131,10 +131,10 @@ DROP TABLE IF EXISTS `Train_line`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Train_line`(
 `trainId` int NOT NULL,
-`transit-line-name` varchar(30) NOT NULL,
-primary key(`trainId`, `transit-line-name`),
+`tlName` varchar(30) NOT NULL,
+primary key(`trainId`, `tlName`),
 foreign key (`trainId`) References `train` (`trainId`),
-foreign key (`transit-line-name`) References `transitLine` (`transit-line-name`)
+foreign key (`tlName`) References `transitLine` (`tlName`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -154,16 +154,14 @@ DROP TABLE IF EXISTS `Transit_line_route`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE  `Transit_line_route`(
-`transit-line-name` varchar(30) NOT NULL,
+`tlName` varchar(30) NOT NULL,
 `stopNum` int NOT NULL,
 `origin` int NOT NULL,
 `dest` int NOT NULL,
-`dept_time` datetime NOT NULL,
-`arrv_time` datetime NOT NULL,
-primary key(`transit-line-name`,`stopNum`),
+primary key(`tlName`,`stopNum`),
 foreign key (`origin`) References `station`(`stationID`),
 foreign key (`dest`) References `station`(`stationID`),
-foreign key (`transit-line-name`) References `transitLine`(`transit-line-name`)
+foreign key (`tlName`) References `transitLine`(`tlName`)
 )ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,7 +209,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `train` WRITE;
 /*!40000 ALTER TABLE `train` DISABLE KEYS */;
-INSERT INTO `train`(trainId) VALUES (161),(251),(113),(152),(184),(244),(291),(313),(253),(287);
+INSERT INTO `train`(trainId) VALUES (100),(101),(102),(103),(104),(105),(106),(107),(108),(109);
 /*!40000 ALTER TABLE `train` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,12 +237,22 @@ UNLOCK TABLES;
 #NOT FINISHED NOT FINISHED
 LOCK TABLES `Transit_line_route` WRITE;
 /*!40000 ALTER TABLE `Transit_line_route` DISABLE KEYS */;
-#NOT FINISHED REFER TO DRAWING
-INSERT INTO `Transit_line_route`(`transit-line-name`,`stopNum`,`origin`,`dest`,`dept_time`,`arrv_time`) VALUES
-('Northeast Corridor',1,11,12);
+#basically the path each transit line takes
+INSERT INTO `Transit_line_route`(`tlName`,`stopNum`,`origin`,`dest`) VALUES
+('Northeast Corridor', 1, 11, 12),
+('Northeast Corridor', 2, 12, 13),
+('Northeast Corridor', 3, 13, 14),
+('Northeast Corridor', 4, 14, 13),
+('Northeast Corridor', 5, 13, 12),
+('Northeast Corridor', 6, 12, 11);
+/*
+('Raritan Valley Line', 1, 11, 12),
+('Raritan Valley Line', 1, 11, 12),
+('Raritan Valley Line', 1, 11, 12),
+('Raritan Valley Line', 1, 11, 12),
+*/
 /*!40000 ALTER TABLE `Transit_line_route` ENABLE KEYS */;
 UNLOCK TABLES;
-
 
 LOCK TABLES `Schedule` WRITE;
 /*!40000 ALTER TABLE `Schedule` DISABLE KEYS */;
@@ -267,7 +275,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `transitLine` WRITE;
 /*!40000 ALTER TABLE `transitLine` DISABLE KEYS */;
-INSERT INTO `transitLine`(`transit-line-name`, `origin`, `destination`, `fixed fare`) VALUES
+INSERT INTO `transitLine`(`tlName`, `origin`, `destination`, `fixed fare`) VALUES
 ('Northeast Corridor', 11, 14, 2.0),
 ('Raritan Valley Line', 15, 18, 3.0),
 ('Keystone Service', 19, 22, 5.0),
