@@ -159,7 +159,9 @@ CREATE TABLE  `Transit_line_route`(
 `stopNum` int NOT NULL,
 `origin` int NOT NULL,
 `dest` int NOT NULL,
-primary key(`tlName`,`stopNum`),
+`arv_time` datetime,
+`dep_time` datetime,
+primary key(`tlName`,`stopNum`,`arv_time`),
 foreign key (`origin`) References `station`(`stationID`),
 foreign key (`dest`) References `station`(`stationID`),
 foreign key (`tlName`) References `transitLine`(`tlName`)
@@ -250,22 +252,41 @@ INSERT INTO `station`(`stationId`,`state`, `name`, `city`) VALUES
 UNLOCK TABLES;
 
 #NOT FINISHED NOT FINISHED
+
 LOCK TABLES `Transit_line_route` WRITE;
 /*!40000 ALTER TABLE `Transit_line_route` DISABLE KEYS */;
-#basically the path each transit line takes
-INSERT INTO `Transit_line_route`(`tlName`,`stopNum`,`origin`,`dest`) VALUES
-('Northeast Corridor', 1, 11, 12),
-('Northeast Corridor', 2, 12, 13),
-('Northeast Corridor', 3, 13, 14),
-('Northeast Corridor', 4, 14, 13),
-('Northeast Corridor', 5, 13, 12),
-('Northeast Corridor', 6, 12, 11);
-/*
-('Raritan Valley Line', 1, 11, 12),
-('Raritan Valley Line', 1, 11, 12),
-('Raritan Valley Line', 1, 11, 12),
-('Raritan Valley Line', 1, 11, 12),
-*/
+INSERT INTO `Transit_line_route`(`tlName`,`stopNum`,`origin`,`dest`, `arv_time`, `dep_time`) VALUES
+('Northeast Corridor', 1, 11, 12,'2015-12-20 10:01:00', '2015-12-20 10:05:00' ),
+('Northeast Corridor', 2, 12, 13, '2015-12-20 10:25:00', '2015-12-20 10:30:00' ),
+('Northeast Corridor', 3, 13, 14, '2015-12-20 10:45:00', '2015-12-20 11:50:00'),
+('Northeast Corridor', 4, 14, 13,'2015-12-20 12:10:00', '2015-12-20 12:15:00'),
+('Northeast Corridor', 5, 13, 12, '2015-12-20 12:30:00', '2015-12-20 12:35:00'),
+('Northeast Corridor', 6, 12, 11,'2015-12-20 12:50:00', '2015-12-20 01:00:00'),
+('Northeast Corridor', 1, 11, 12,'2015-12-21 10:01:00', '2015-12-21 10:05:00' ),
+('Northeast Corridor', 2, 12, 13, '2015-12-21 10:25:00', '2015-12-21 10:30:00' ),
+('Northeast Corridor', 3, 13, 14, '2015-12-21 10:45:00', '2015-12-21 11:50:00'),
+('Northeast Corridor', 4, 14, 13,'2015-12-21 12:10:00', '2015-12-21 12:15:00'),
+('Northeast Corridor', 5, 13, 12, '2015-12-21 12:30:00', '2015-12-21 12:35:00'),
+('Northeast Corridor', 6, 12, 11,'2015-12-21 12:50:00', '2015-12-21 01:00:00'),
+('Raritan Valley Line', 1, 15, 16,'2015-11-23 10:01:00', '2015-11-23 10:05:00'),
+('Raritan Valley Line', 2, 16, 17,'2015-11-23 10:25:00', '2015-11-23 10:30:00'),
+('Raritan Valley Line', 4, 18, 17, '2015-11-23 10:45:00', '2015-11-23 11:50:00'),
+('Raritan Valley Line', 5, 17, 16,'2015-11-23 12:10:00', '2015-11-23 12:15:00'),
+('Raritan Valley Line', 6, 16, 15,'2015-11-23 12:50:00', '2015-11-23 01:00:00'),
+('Keystone Service', 1, 19, 11, '2015-2-20 10:01:00', '2015-2-20 10:05:00'),
+('Keystone Service', 1, 11, 14, '2015-2-20 10:25:00', '2015-2-20 10:30:00'),
+('Keystone Service', 2, 11, 14, '2015-2-20 10:45:00', '2015-2-20 11:50:00'),
+('Keystone Service', 3, 14, 20, '2015-2-20 12:10:00', '2015-2-20 12:15:00'),
+('Keystone Service', 4, 20, 21, '2015-2-20 12:30:00', '2015-2-20 12:35:00'),
+('Keystone Service', 5, 21, 22, '2015-2-20 12:50:00', '2015-2-20 13:00:00'),
+('Keystone Service', 6, 22, 21, '2015-2-20 13:20:00', '2015-2-20 13:40:00'),
+('Keystone Service', 1, 19, 11, '2015-2-26 10:01:00', '2015-2-26 10:05:00'),
+('Keystone Service', 1, 11, 14, '2015-2-26 10:25:00', '2015-2-26 10:30:00'),
+('Keystone Service', 2, 11, 14, '2015-2-26 10:45:00', '2015-2-26 11:50:00'),
+('Keystone Service', 3, 14, 20, '2015-2-26 12:10:00', '2015-2-26 12:15:00'),
+('Keystone Service', 4, 20, 21, '2015-2-26 12:30:00', '2015-2-26 12:35:00'),
+('Keystone Service', 5, 21, 22, '2015-2-26 12:50:00', '2015-2-26 13:00:00'),
+('Keystone Service', 6, 22, 21, '2015-2-26 13:20:00', '2015-2-26 13:40:00');	
 /*!40000 ALTER TABLE `Transit_line_route` ENABLE KEYS */;
 UNLOCK TABLES;
 
