@@ -43,8 +43,8 @@ CREATE TABLE `customerrep`(
 	`repuser` varchar(30) NOT NULL,
 	`reppass` varchar(30) NOT NULL,
 	`ssn` varchar(9) NOT NULL,
-   	`first name` varchar(25) DEFAULT NULL,
-	`last name` varchar(25) DEFAULT NULL, 
+   	`firstname` varchar(25) DEFAULT NULL,
+	`lastname` varchar(25) DEFAULT NULL, 
 	primary key(`repuser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -151,11 +151,15 @@ DROP TABLE IF EXISTS `Transit_line_route`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE  `Transit_line_route`(
-`sched_id` int NOT NULL,
 `transit-line-name` varchar(30) NOT NULL,
-`no_stops` int NOT NULL,
-primary key(`sched_id`, `transit-line-name`),
-foreign key (`sched_id`) References `schedule`(`sched_id`),
+`stopNum` int NOT NULL,
+`origin` int NOT NULL,
+`dest` int NOT NULL,
+`dept_time` datetime NOT NULL,
+`arrv_time` datetime NOT NULL,
+primary key(`transit-line-name`,`stopNum`),
+foreign key (`origin`) References `station`(`stationID`),
+foreign key (`dest`) References `station`(`stationID`),
 foreign key (`transit-line-name`) References `transitLine`(`transit-line-name`)
 )ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -171,7 +175,21 @@ foreign key (`reservation no.`) References `reservation` (`reservation no.`),
 foreign key (`sched_id`) References `Schedule` (`sched_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
+DROP TABLE IF EXISTS `messaging`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `messages`(
+	`messageId` int NOT NULL AUTO_INCREMENT,
+	`customeruser` varchar(30) NOT NULL,
+    `repuser` varchar(30) NOT NULL,
+    `subject` varchar(150) NOT NULL,
+    `content` varchar(500) DEFAULT NULL,
+    `answer` varchar(500) DEFAULT NULL,
+    primary key(`messageId`, `customeruser`, `repuser`),
+    foreign key (`customeruser`) References `customer`(`customeruser`),
+    foreign key(`repuser`) References `customerrep`(`repuser`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+    
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
 insert into `customer`(`customeruser`, `email`, `first name`, `last name`, `customerpass`) VALUES
@@ -193,11 +211,20 @@ UNLOCK TABLES;
 
 LOCK TABLES `customerrep` WRITE;
 /*!40000 ALTER TABLE `customerrep` DISABLE KEYS */;
-INSERT INTO `customerrep` (`repuser`, `reppass`,`ssn`,`first name`, `last name`) VALUES	
+INSERT INTO `customerrep` (`repuser`, `reppass`,`ssn`,`firstname`, `lastname`) VALUES	
 ('ma343', 'm345', '112-11111', 'Mia1', 'Jones1'),
 ('hp009', 'h666', '221-22111', 'Harper1', 'Brown1'),
 ('vy757', 'vyng433', '212-33445', 'Victoria2', 'Young5');
 /*!40000 ALTER TABLE `customerrep` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+INSERT INTO `messages`(`messageId`, `customeruser`, `repuser`, `subject`, `content`, `answer`) VALUES
+	('1', 'siddhik', 'ma343','Make a reseravtion', 'Not able to make a registration', 'Specific Issue?'),
+    ('2', 'heeraln', 'ma343','Unable to search', 'Why is search not working?', NULL),
+    ('3', 'siddhik', 'hp009','Login not working', 'I am unable to log into my account.', NULL);
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 LOCK TABLES `train` WRITE;
@@ -287,3 +314,4 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
