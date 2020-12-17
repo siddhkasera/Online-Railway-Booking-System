@@ -13,6 +13,7 @@
 		
 	</head>
 	<body>
+		<a href = "Admin-Success.jsp"><button> Home </button></a>
 		<%
 		try{
     		ApplicationDB db = new ApplicationDB();	

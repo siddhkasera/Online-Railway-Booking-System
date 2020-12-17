@@ -13,6 +13,7 @@
 		
 	</head>
 	<body>
+		<a href = "Admin-Success.jsp"><button> Home </button></a>
 		<p> Edit a customer representative account info: </p>
 		<% 
 		try{

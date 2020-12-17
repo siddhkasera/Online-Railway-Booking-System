@@ -8,8 +8,21 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Sales Report</title>
+		<style>
+			table, td, th {
+	  			border: 1px solid black;
+			}
+			table {
+				border-collapse: collapse;
+				width: 70%;
+			}
+			h3, h1 {
+				text-align: center;
+			}
+		</style>
 	</head>
 	<body>
+		<a href = "Admin-Success.jsp"><button> Home </button></a>
 		<%
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
@@ -58,21 +71,30 @@
 			//if month is chosen
 			if (request.getParameter("month") != null && !request.getParameter("month").isEmpty()){
 				String month = request.getParameter("month");
-				out.println("month: " + request.getParameter("month"));
+				out.println("<h3>" +"month: " + request.getParameter("month"));
 				
 				ResultSet rs = stmt.executeQuery("SELECT sum(totalFare) FROM reservation WHERE DATE_FORMAT(date, '%b') = '" + month + "'");
 				if(rs.next()){
 					if(rs.getString(1) != null){
-						out.println("</h3>" + month.replace("'", "") + "\n Total Revenue: $"+rs.getString(1) +"</h3>");
-						out.print("<tr><th>Customer</th> <th>Schedule #</th> <th>Date</th> <th>Sales</th>");
+						//  print the total month's revenue
+						out.println("<h3>" + " Total Revenue: $"+rs.getString(1) +"</h3>");
+						out.print("<tr><th>Customer</th> <th>Reservation No.</th> <th>Date</th> <th>Total Fare</th> <th>Discount group</th>");
 					}
 					else{
-						out.print("</h3> No data found for this month </h3>");
+						out.print("<br> </h3> No reservations for this month </h3>");
 					}
 				}
-				rs = stmt.executeQuery("SELECT * FROM reservation WHERE DATE_FORMAT(date, '%c') = '" + month + "'ORDER BY date DESC");
+				// print table with all reservations
+				rs = stmt.executeQuery("SELECT * FROM reservation WHERE DATE_FORMAT(date, '%b') = '" + month + "'ORDER BY totalFare DESC");
+				while(rs.next()){
+					out.println("<tr><td>"+rs.getString("customeruser")+
+							"</td><td>"+rs.getString("reservation no.")+
+							"</td><td>" +rs.getString("date")+
+							"</td><td>"+rs.getString("totalFare")+
+							"</td><td>"+rs.getString("discount_group") +"</td><td>");
+			    		//out.println(rows);
+				}
 				
-					
 			}
 			%>
 		</table>
@@ -83,20 +105,35 @@
 	    		String category = request.getParameter("category");
 	    		// each of these categories are per month
 	    		if(category.equals("transitLine")){
+	    			out.print("<tr><th>Transit Line</th><th>Total Sales</th></tr>");
 	    			
+	    			/// ADD HEREEEEEEEEEE
+	    		}
+	    		if(category.equals("bestLine")){
+					out.print("<tr><th>Transit Line</th><th>Total Sales</th></tr>");
+					
+					/// ADD HEREEEEEEEEEE - top transit line with the most sales
 	    		}
 				if(category.equals("customer")){
-	    			
+					out.print("<tr><th>Customer</th><th>Total Sales</th></tr>");
+					ResultSet rs = stmt.executeQuery("SELECT customeruser, sum(totalfare) as totalSales FROM reservation GROUP BY customeruser ORDER BY sum(totalfare) DESC");
+					while (rs.next()){
+						out.println("<tr><td>"+rs.getString("customeruser")+"</td><td>"+rs.getString("totalSales")+"</td></tr>");
+			    	}
 	    		}
+				if(category.equals("bestCustomer")){  // highest ticket sales fare
+					out.print("<tr><th>Customer</th><th>Total Sales</th></tr>");
+					ResultSet rs = stmt.executeQuery("SELECT customeruser, sum(totalfare) as totalSales FROM reservation GROUP BY customeruser ORDER BY sum(totalfare) DESC LIMIT 1");
+					while (rs.next()){
+						out.println("<tr><td>"+rs.getString("customeruser")+"</td><td>"+rs.getString("totalSales")+"</td></tr>");
+			    	}
+				}
 				if(category.equals("desCity")){
-	    			
-	    		}
-				if(category.equals("bestLine")){
-	    			
-	    		}
-				if(category.equals("bestCustomer")){
-	    			
-	    		}
+					out.print("<tr><th>Destination City</th><th>Total Sales</th></tr>");
+					
+					/// ADD HEREEEEEEEEEE - top destination city with the most sales
+					
+				}
 				
 	    	}
 	    	

@@ -22,6 +22,7 @@
 		</style>
 	</head>
 	<body>
+		<a href = "Admin-Success.jsp"><button> Home </button></a>
 		<center><h4>Edit Costumer Rep Account</h4></center>
 		<table>
 		<tr>
@@ -63,12 +64,10 @@
 			}
 			db.closeConnection(con);
 		}
-		
 		catch (Exception e) {
 			out.print(e);
 		}
 		 %>
-	</table>
-		
+		</table>
 	</body>
 </html>
