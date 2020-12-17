@@ -10,21 +10,18 @@
 	<body>
 		<%
 		    if ((session.getAttribute("customeruser") == null)) {
-		%>
-		You are not logged in<br/>
-		<a href="AccountType.jsp">Please Login</a>
+			%>
+			You are not logged in<br/>
+			<a href="AccountType.jsp"><button> Please Login </button></a>
 		<%} else {
+			%>
+			Welcome <%=session.getAttribute("customeruser") %>  
+			<a href="Logout.jsp">Log out</a>
+			<%
+		}
 		%>
-		<h2> Welcome <%=session.getAttribute("customeruser") %>  
-		<a href="Logout.jsp">Log out</a> </h2>
-		<%
-		  }
-		%>
-		<p> What would you like to do? </p>
-		<button>Reserve A Ticket</button>
-	    <button>View All Reservations</button>
-	    <button>View Travel Itinerary</button>
-	    <button>Message a Customer Rep</button>
+		// add more things here for Costumer account functionalities
+		<a href= "Customer-messaging.jsp"><button> Messaging </button></a>
 		
 	</body>
 </html>
