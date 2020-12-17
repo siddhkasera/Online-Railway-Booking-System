@@ -16,7 +16,7 @@
 		<%} else {
 			%>
 			Welcome <%=session.getAttribute("customeruser") %>  
-			<a href="Logout.jsp">Log out</a>
+			<a href="Logout.jsp"><button>Log out</button></a>
 			<%
 		}
 		%>
