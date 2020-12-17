@@ -20,7 +20,7 @@
 			<%
 		}
 		%>
-		// add more things here for Costumer account functionalities
+		
 		<a href= "Customer-messaging.jsp"><button> Messaging </button></a>
 		
 	</body>
