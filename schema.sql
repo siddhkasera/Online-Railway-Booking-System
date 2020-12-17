@@ -77,10 +77,11 @@ CREATE TABLE `reservation` (
   `reservation no.`int NOT NULL, 
   `tripType` enum('oneway', 'roundtrip') NOT NULL,
   `date` date NOT NULL, 
-  `passenger`varchar(50), 
+  `customeruser` varchar(30) NOT NULL, 
   `totalFare` double DEFAULT NULL,
   `discount_group` enum('Senior', 'Child', 'Disabled', 'Normal') NOT NULL,
-  primary key(`reservation no.`)
+  primary key(`reservation no.`),
+  foreign key(`customeruser`) References `customer`(`customeruser`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
