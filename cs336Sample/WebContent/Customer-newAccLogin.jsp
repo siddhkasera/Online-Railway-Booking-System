@@ -22,12 +22,12 @@
 			Statement stmt = con.createStatement();
 		    
 		    ResultSet rs;
-		    rs = stmt.executeQuery("select * from customer where customeruser='" + userid + "'");
+		    rs = stmt.executeQuery("SELECT * FROM customer WHERE customeruser='" + userid + "'");
 		    if (rs.next()) {
 		    	out.println("Username exists, please try another <a href='Customer-Login.jsp'>try again</a>");
 		    } else {
-		    	int x = stmt.executeUpdate("insert into customer values('" + userid + "', '" + email + "', '" + firstname + "', '" + lastname + "', '" + pass + "')");
-		    	session.setAttribute("customeruser", userid); // the username will be stored in the session
+		    	int x = stmt.executeUpdate("INSERT INTO customer VALUES('" + userid + "', '" + email + "', '" + firstname + "', '" + lastname + "', '" + pass + "')");
+		    	session.setAttribute("customeruser", userid);
 		        response.sendRedirect("Customer-Success.jsp");
 		    }
 		%>
