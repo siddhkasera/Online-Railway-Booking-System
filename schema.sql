@@ -181,14 +181,14 @@ DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages`(
 	`messageId` int NOT NULL AUTO_INCREMENT,
 	`customeruser` varchar(30) NOT NULL,
-    `repuser` varchar(30) NOT NULL,
+    `repuser` varchar(30) DEFAULT NULL,
     `subject` varchar(150) NOT NULL,
     `content` varchar(500) DEFAULT NULL,
     `answer` varchar(500) DEFAULT NULL,
-    primary key(`messageId`, `customeruser`, `repuser`),
+    primary key(`messageId`),
     foreign key (`customeruser`) References `customer`(`customeruser`),
     foreign key(`repuser`) References `customerrep`(`repuser`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
     
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
