@@ -15,11 +15,15 @@
 		<a href="AccountType.jsp">Please Login</a>
 		<%} else {
 		%>
-		Welcome <%=session.getAttribute("repuser") %>  
-		<a href="Logout.jsp">Log out</a>
+		<h2> Welcome <%=session.getAttribute("repuser") %>  
+		<a href="Logout.jsp">Log out</a> </h2>
 		<%
 		    }
 		%>
-		// add more things here for Costumer Representative account functionalities
+		<p> What would you like to do? </p>
+		<button>View and Edit Train Schedules</button>
+	    <button>Message Customers</button>
+	    <button>View Customers on a Transit Line</button>
+	    <button>View Schedule for a Station</button>
 	</body>
 </html>

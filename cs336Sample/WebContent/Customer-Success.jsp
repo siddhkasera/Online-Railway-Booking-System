@@ -15,11 +15,16 @@
 		<a href="AccountType.jsp">Please Login</a>
 		<%} else {
 		%>
-		Welcome <%=session.getAttribute("customeruser") %>  
-		<a href="Logout.jsp">Log out</a>
+		<h2> Welcome <%=session.getAttribute("customeruser") %>  
+		<a href="Logout.jsp">Log out</a> </h2>
 		<%
-		    }
+		  }
 		%>
-		// add more things here for Costumer account functionalities
+		<p> What would you like to do? </p>
+		<button>Reserve A Ticket</button>
+	    <button>View All Reservations</button>
+	    <button>View Travel Itinerary</button>
+	    <button>Message a Customer Rep</button>
+		
 	</body>
 </html>
