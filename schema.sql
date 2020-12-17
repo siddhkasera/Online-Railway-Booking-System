@@ -294,11 +294,11 @@ UNLOCK TABLES;
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-Insert into `reservation` (`reservation no.`, `tripType`, `date`, `passenger`,`totalFare`, `discount_group`) VALUES
-(111, 'oneway', '2020-10-08', 'Siddhi', 12.0, 'Normal'),
-(222, 'oneway', '2020-11-09', 'Heeral', 34.0, 'Normal'),
-(333, 'roundtrip', '2020-12-21','John', 24.0, 'Senior'),
-(444, 'roundtrip', '2020-12-22', 'Jack', 17.0, 'Child');
+Insert into `reservation` (`reservation no.`, `tripType`, `date`, `customeruser`,`totalFare`, `discount_group`) VALUES
+(111, 'oneway', '2020-10-08', 'emilyj', 12.0, 'Normal'),
+(222, 'oneway', '2020-11-09', 'heeraln', 34.0, 'Normal'),
+(333, 'roundtrip', '2020-12-21','jackw', 24.0, 'Senior'),
+(444, 'roundtrip', '2020-12-22', 'siddhik', 17.0, 'Child');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
