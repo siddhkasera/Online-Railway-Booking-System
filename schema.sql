@@ -175,7 +175,7 @@ foreign key (`reservation no.`) References `reservation` (`reservation no.`),
 foreign key (`sched_id`) References `Schedule` (`sched_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `messaging`;
+DROP TABLE IF EXISTS `messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `messages`(
