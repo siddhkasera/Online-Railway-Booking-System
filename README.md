@@ -7,10 +7,6 @@ user: hnn13
 pass: cs336
 
 equal contribution
-admin user: 
+admin user: admin1
 
-admin1
-
-admin pass:
-
-admin2
+admin pass: admin2
