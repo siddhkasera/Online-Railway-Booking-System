@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `Schema` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `Schema`;
+CREATE DATABASE IF NOT EXISTS `schema` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `schema`;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -88,19 +88,6 @@ CREATE TABLE `reservation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
  
-DROP TABLE IF EXISTS `reserves`;
-/*!40101 SET @saved_cs_client = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `reserves` (
-`customeruser` varchar(30) NOT NULL,
-`reservation no.` int NOT NULL,
-primary key(`customeruser`, `reservation no.`),
-foreign key(`customeruser`) References `customer`(`customeruser`),
-foreign key(`reservation no.`) References `reservation`(`reservation no.`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
 DROP TABLE IF EXISTS `transitLine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -115,18 +102,6 @@ foreign key (`destination`) References `station`(`stationId`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-DROP TABLE IF EXISTS `Transit_line_stations`;
-/*!40101 SET @saved_cs_client  = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Transit_line_stations`(
-`stationId` int NOT NULL,
-`tlName` varchar(30) NOT NULL,
-primary key(`stationId`, `tlName`),
-foreign key (`stationId`) References `station` (`stationId`),
-foreign key (`tlName`) References `transitLine` (`tlName`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 DROP TABLE IF EXISTS `Train_line`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -137,18 +112,6 @@ primary key(`trainId`, `tlName`),
 foreign key (`trainId`) References `train` (`trainId`),
 foreign key (`tlName`) References `transitLine` (`tlName`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-DROP TABLE IF EXISTS `Schedule`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE  `Schedule`(
-`sched_id`  int NOT NULL AUTO_INCREMENT,
-`dept_time` datetime NOT NULL,
-`arrv_time` datetime NOT NULL,
-`trav_time` datetime NOT NULL,
-primary key(`sched_id`)
-)ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `Transit_line_route`;
@@ -167,17 +130,6 @@ foreign key (`dest`) References `station`(`stationID`),
 foreign key (`tlName`) References `transitLine`(`tlName`)
 )ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
-DROP TABLE IF EXISTS `Reserve_train_schedule`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE  `Reserve_train_schedule`(
-`reservation no.`int NOT NULL, 
-`sched_id`  int NOT NULL,
-primary key(`reservation no.`, `sched_id`),
-foreign key (`reservation no.`) References `reservation` (`reservation no.`),
-foreign key (`sched_id`) References `Schedule` (`sched_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `messages`;		
 /*!40101 SET @saved_cs_client     = @@character_set_client */;		
@@ -251,8 +203,6 @@ INSERT INTO `station`(`stationId`,`state`, `name`, `city`) VALUES
 /*!40000 ALTER TABLE `station` ENABLE KEYS */;
 UNLOCK TABLES;
 
-#NOT FINISHED NOT FINISHED
-
 LOCK TABLES `Transit_line_route` WRITE;
 /*!40000 ALTER TABLE `Transit_line_route` DISABLE KEYS */;
 INSERT INTO `Transit_line_route`(`tlName`,`stopNum`,`origin`,`dest`, `arv_time`, `dep_time`) VALUES
@@ -288,25 +238,6 @@ INSERT INTO `Transit_line_route`(`tlName`,`stopNum`,`origin`,`dest`, `arv_time`,
 ('Keystone Service', 5, 21, 22, '2015-2-26 12:50:00', '2015-2-26 13:00:00'),
 ('Keystone Service', 6, 22, 21, '2015-2-26 13:20:00', '2015-2-26 13:40:00');	
 /*!40000 ALTER TABLE `Transit_line_route` ENABLE KEYS */;
-UNLOCK TABLES;
-
-LOCK TABLES `Schedule` WRITE;
-/*!40000 ALTER TABLE `Schedule` DISABLE KEYS */;
-INSERT INTO `Schedule`(`sched_id`, `dept_time`, `arrv_time`, `trav_time`) VALUES
- (1001,'8:20','8:41', 21)
-,(1002,'8:41','8:55', 14)
-,(1003,'8:55','9:35', 40)
-,(1004,'9:35','10:00', 25)
-,(1005,'11:00','11:25', 25)
-,(1006,'11:25','12:05', 40)
-,(1007,'12:05','12:19', 24)
-,(1008,'12:19','12:40', 19)
-,(1009,'15:47','16:11', 17)
-,(1010,'16:11','16:22', 11)
-,(1011,'16:22','16:55', 33)
-,(1012,'16:55','17:27', 28)
-,(1013,'20:00','20:22', 22);
-/*!40000 ALTER TABLE `Schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
 LOCK TABLES `transitLine` WRITE;
@@ -352,4 +283,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
