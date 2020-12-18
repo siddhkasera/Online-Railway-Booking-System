@@ -15,7 +15,7 @@
 			<a href="AccountType.jsp"><button> Please Login </button></a>
 		<%} else {
 			%>
-			Welcome <%=session.getAttribute("customeruser") %>  
+			<h3>Welcome <%=session.getAttribute("customeruser") %>  </h3>
 			<p style="float: right;"><a href="Logout.jsp"><button>Log out</button></a></p>
 			<%
 		}

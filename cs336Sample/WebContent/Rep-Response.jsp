@@ -13,20 +13,19 @@
 	</head>
 	<body>
 		<% 
-	
+		
 		try{
 			ApplicationDB db = new ApplicationDB();
 			Connection con = db.getConnection();
 			Statement stmt = con.createStatement();
 			
-			String repuser = request.getParameter("value");
-			String firstname = request.getParameter("firstname");
-			String lastname = request.getParameter("lastname");
+			String repuser = request.getParameter("repuser");
+			String messageId = request.getParameter("firstname");
 			
 			int x = stmt.executeUpdate("UPDATE customerrep SET firstname='" + firstname +
 				"',  lastname='" + lastname+ "' WHERE repuser ='"+ repuser+"'");
 			if(x == 1){
-				response.sendRedirect("Admin-ViewUsers.jsp");
+				response.sendRedirect("Rep-AnswerMessages.jsp");
 			}
 			db.closeConnection(con);
 		}

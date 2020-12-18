@@ -28,7 +28,7 @@
 				
 				<select name="username" id="username">
 					<option value="" selected>All users</option>
-		
+						
 					<%
 					while(result.next()) {
 					%>
