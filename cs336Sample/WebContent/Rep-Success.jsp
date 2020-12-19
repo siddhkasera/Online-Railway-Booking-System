@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<%
-		    if (session.getAttribute("repuser") == null) {
+		    if ((session.getAttribute("repuser") == null)) {
 		%>
 			You are not logged in<br/>
 			<a href="AccountType.jsp">Please Login</a>
@@ -27,7 +27,23 @@
 		    }
 		%>
 		// add more things here for Costumer Representative account functionalities
-		<br><a href = "Rep-AnswerMessage.jsp"><button> View/Reply to Customer Questions</button></a>
-		
+		<table style="width:70%">
+		  <tr>
+		    <th>Firstname</th>
+		    <th>Lastname</th> 
+		    <th>Age</th>
+		  </tr>
+		  <tr>
+		    <td>Jill</td>
+		    <td>Smith</td> 
+		    <td>50</td>
+		  </tr>
+		  <tr>
+		    <td>Eve</td>
+		    <td>Jackson</td> 
+		    <td>94</td>
+		  </tr>
+		</table>
+		<a href= "Rep-TableForStation.jsp"><button>produce schedule for specific station</button>
 	</body>
 </html>

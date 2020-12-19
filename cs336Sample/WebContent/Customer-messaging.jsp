@@ -15,7 +15,7 @@
 		%>
 	</head>
 	<body>
-		
+		<a "href="Customer-Success.jsp"><button>Home</button></a>
 		<p style="float: right;"><a "href="Logout.jsp"><button>Logout</button></a>
 	
 		<h3>Messaging</h3>
@@ -71,7 +71,7 @@
 		if(request.getParameter("search") != null){ 
 			// display search results where subject or content has keywords
 			ResultSet rs1 = stmt.executeQuery("SELECT * FROM messages WHERE subject REGEXP '" + search+ "' or content REGEXP '" + search+ "'ORDER BY messageId");
-			if(rs1.next()){
+			while(rs1.next()){
 				out.println("ID: "); %>
 				<%=rs1.getString("messageId") %> <br>
 				

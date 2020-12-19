@@ -15,13 +15,17 @@
 			<a href="AccountType.jsp"><button> Please Login </button></a>
 		<%} else {
 			%>
-			<h3>Welcome <%=session.getAttribute("customeruser") %>  </h3>
-			<p style="float: right;"><a href="Logout.jsp"><button>Log out</button></a></p>
+			<h2> Welcome <%=session.getAttribute("customeruser") %></h2>
 			<%
 		}
 		%>
 		<br>
 		<a href= "Customer-messaging.jsp"><button> Messaging </button></a>
+		<button>Reserve a Ticket</button>
+		<button>View Past Reservations</button>
+		<button>View Travel Itinerary</button>
+		<a href= "BrowseFunction.jsp"><button>Browse Train Schedule</button>
+		<a href="Logout.jsp"><button>Log out</button></a>
 		
 	</body>
 </html>
